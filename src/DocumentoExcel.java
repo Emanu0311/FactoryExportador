@@ -1,7 +1,16 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class DocumentoExcel implements Documento {
     @Override
-    public void exportar(String datos) {
+    public void exportar(String datos, String ruta) {
         System.out.println("SISTEMA EXCEL: Creando hojas y celdas...");
-        System.out.println("Archivo generado: [reporte.xlsx] con contenido: " + datos);
+        try (FileWriter writer = new FileWriter(ruta)) {
+            writer.write("Excel Header,Columna1,Columna2\n");
+            writer.write("Data," + datos + ",0\n");
+            System.out.println("Archivo generado: [" + ruta + "] con contenido: " + datos);
+        } catch (IOException e) {
+            System.err.println("Error al escribir el archivo Excel: " + e.getMessage());
+        }
     }
 }

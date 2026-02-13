@@ -1,3 +1,3 @@
 public interface Documento {
-    void exportar(String datos);
+    void exportar(String datos, String ruta);
 }
